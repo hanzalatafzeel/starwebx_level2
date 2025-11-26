@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 // Use Vite env for production (Vercel). Local dev fallback is localhost:5173 (Vite dev server).
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:5173'
+const BASE = 'https://starwebx-level2.onrender.com'
 
 const api = axios.create({
   baseURL: BASE,
