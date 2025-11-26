@@ -1,7 +1,8 @@
+// src/services/api.js
 import axios from 'axios'
 
-const BASE = import.meta.env.VITE_API_URL || 'http://localhost:5173' // fallback if not set
-
+// Use Vite env for production (Vercel). Local dev fallback is localhost:5173 (Vite dev server).
+const BASE = import.meta.env.VITE_API_URL || 'http://localhost:5173'
 
 const api = axios.create({
   baseURL: BASE,
@@ -10,7 +11,7 @@ const api = axios.create({
   }
 })
 
-// Add token to requests
+// Attach Bearer token if present
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')
@@ -19,18 +20,17 @@ api.interceptors.request.use(
     }
     return config
   },
-  (error) => {
-    return Promise.reject(error)
-  }
+  (error) => Promise.reject(error)
 )
 
-// Handle auth errors
+// Global auth error handling
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
+      // redirect to login - adjust path if your router uses something else
       window.location.href = '/login'
     }
     return Promise.reject(error)
@@ -38,44 +38,39 @@ api.interceptors.response.use(
 )
 
 export default {
-  // Auth
+  // Auth (note: /api prefix is required by backend blueprint)
   signup(data) {
-    return api.post('/auth/signup', data)
+    return api.post('/api/auth/signup', data)
   },
   login(data) {
-    return api.post('/auth/login', data)
+    return api.post('/api/auth/login', data)
   },
   getCurrentUser() {
-    return api.get('/auth/me')
+    return api.get('/api/auth/me')
   },
   updateProfile(data) {
-    const config = {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    }
-    return api.put('/auth/profile', data, config)
+    const config = { headers: { 'Content-Type': 'multipart/form-data' } }
+    return api.put('/api/auth/profile', data, config)
   },
 
   // Invoices
   getInvoices() {
-    return api.get('/invoices')
+    return api.get('/api/invoices')
   },
   getInvoice(id) {
-    return api.get(`/invoices/${id}`)
+    return api.get(`/api/invoices/${id}`)
   },
   createInvoice(data) {
-    return api.post('/invoices', data)
+    return api.post('/api/invoices', data)
   },
   updateInvoice(id, data) {
-    return api.put(`/invoices/${id}`, data)
+    return api.put(`/api/invoices/${id}`, data)
   },
   deleteInvoice(id) {
-    return api.delete(`/invoices/${id}`)
+    return api.delete(`/api/invoices/${id}`)
   },
+  // PDF download (ensure backend route matches this)
   downloadPDF(id) {
-    return api.get(`/invoices/${id}/pdf`, {
-      responseType: 'blob'
-    })
+    return api.get(`/api/invoices/${id}/download`, { responseType: 'blob' })
   }
 }
