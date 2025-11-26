@@ -15,8 +15,12 @@ class Config:
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=24)
     
     # CORS (safe parser)
-    _raw_origins = os.getenv('CORS_ORIGINS', 'http://localhost:5173' ,'https://starwebx-level2.vercel.app')
+    # Default: allow local dev frontend and the deployed frontend on Vercel
+    # Provide a comma-separated list via the CORS_ORIGINS environment variable
+    _raw_origins = os.getenv('CORS_ORIGINS', 'http://localhost:5173,https://starwebx-level2.vercel.app')
     if _raw_origins.strip() == "*" or _raw_origins.strip().lower() == "all":
         CORS_ORIGINS = "*"
     else:
+        # split comma separated list, strip whitespace and ignore empty items
         CORS_ORIGINS = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+
