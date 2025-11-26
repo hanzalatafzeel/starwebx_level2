@@ -1,4 +1,4 @@
-# 🚀 InvoiceGen – Professional Invoice Generator (Flask + Vue.js)
+# 🚀 InvoiceGen – Professional Invoice Generator
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/yourusername/invoicegen?color=blue)
 ![GitHub stars](https://img.shields.io/github/stars/yourusername/invoicegen?style=social)
@@ -62,7 +62,7 @@ Create, manage, and download beautiful invoices with your business branding.
 
 ## 📂 Project Structure
 
-```txt
+```
 invoicegen/
 ├── backend/
 │   ├── app.py                 # Flask application entry
@@ -89,7 +89,9 @@ invoicegen/
 │   └── vite.config.js
 │
 └── README.md
+```
 
+---
 
 ## ⚙️ Installation
 
@@ -101,128 +103,153 @@ python -m venv venv
 source venv/bin/activate     # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env
+```
 
+Edit `.env`:
 
-## Edit .env:
-
+```env
 SECRET_KEY=your-secret-key
 JWT_SECRET_KEY=your-jwt-secret-key
 DATABASE_URL=sqlite:///invoicegen.db
 CORS_ORIGINS=http://localhost:5173
-
-
+```
 
 Initialize database:
 
+```bash
 flask init-db
-
+```
 
 Run backend:
 
+```bash
 python app.py
+```
 
-Frontend Setup
+### 🖥️ Frontend Setup
+
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
+Frontend runs at: `http://localhost:5173`
 
-Frontend runs at:
+---
 
-http://localhost:5173
+## 📄 API Endpoints
 
-📄 API Endpoints
-Authentication
-Method	Endpoint	Description
-POST	/api/auth/signup	Register
-POST	/api/auth/login	Login
-GET	/api/auth/me	Get current user
-Invoices
-Method	Endpoint	Description
-GET	/api/invoices	List invoices
-GET	/api/invoices/:id	Get invoice
-POST	/api/invoices	Create invoice
-PUT	/api/invoices/:id	Update invoice
-DELETE	/api/invoices/:id	Delete invoice
-GET	/api/invoices/:id/download	Download PDF
-🗄 Database Schema
-Users
-id, email, password_hash, full_name, company_name, company_logo, created_at
+### Authentication
 
-Invoices
-id, invoice_number, user_id, client_name, client_email,
-client_address, invoice_date, due_date, notes,
-subtotal, tax_rate, tax_amount, total, created_at, updated_at
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/signup` | Register |
+| POST | `/api/auth/login` | Login |
+| GET | `/api/auth/me` | Get current user |
 
-Invoice Items
-id, invoice_id, description, quantity, unit_price, total
+### Invoices
 
-🚀 Deployment
-Backend (Render / Railway)
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/invoices` | List invoices |
+| GET | `/api/invoices/:id` | Get invoice |
+| POST | `/api/invoices` | Create invoice |
+| PUT | `/api/invoices/:id` | Update invoice |
+| DELETE | `/api/invoices/:id` | Delete invoice |
+| GET | `/api/invoices/:id/download` | Download PDF |
+
+---
+
+## 🗄 Database Schema
+
+### Users
+- `id`, `email`, `password_hash`, `full_name`, `company_name`, `company_logo`, `created_at`
+
+### Invoices
+- `id`, `invoice_number`, `user_id`, `client_name`, `client_email`, `client_address`, `invoice_date`, `due_date`, `notes`, `subtotal`, `tax_rate`, `tax_amount`, `total`, `created_at`, `updated_at`
+
+### Invoice Items
+- `id`, `invoice_id`, `description`, `quantity`, `unit_price`, `total`
+
+---
+
+## 🚀 Deployment
+
+### Backend (Render / Railway)
 
 Install gunicorn:
 
-gunicorn
-
+```bash
+pip install gunicorn
+```
 
 Render Start Command:
 
+```bash
 gunicorn 'app:app' --bind 0.0.0.0:$PORT --workers 3
-
+```
 
 Environment Variables:
 
+```env
 FLASK_ENV=production
 CORS_ORIGINS=https://your-frontend.vercel.app
 SECRET_KEY=xxxx
 JWT_SECRET_KEY=xxxx
 DATABASE_URL=postgresql://...
+```
 
-Frontend (Vercel / Netlify)
+### Frontend (Vercel / Netlify)
 
 Set environment variable:
 
+```env
 VITE_API_URL=https://your-backend.onrender.com
-
+```
 
 Build:
 
+```bash
 npm run build
+```
 
+Deploy the `dist/` folder.
 
-Deploy the dist/ folder.
+---
 
-🔒 Security
+## 🔒 Security
 
-JWT tokens
+- JWT tokens
+- Password hashing
+- CORS protection
+- ORM SQL injection prevention
+- Sanitized API inputs
 
-Password hashing
+---
 
-CORS protection
+## 🤝 Contributing
 
-ORM SQL injection prevention
+1. Fork the repo
+2. Create a new branch
+3. Commit your changes
+4. Submit a Pull Request
 
-Sanitized API inputs
+---
 
-🤝 Contributing
-
-Fork the repo
-
-Create a new branch
-
-Commit your changes
-
-Submit a Pull Request
-
-📜 License
+## 📜 License
 
 MIT License
 
-👨‍💻 Author
+---
 
-Hanzala Tafzeel
+## 👨‍💻 Author
+
+**Hanzala Tafzeel**  
 Full-Stack Developer | IITM BS Data Science Student
 
-⭐ Support
+---
+
+## ⭐ Support
 
 If you liked this project, please give it a star ⭐ on GitHub!
