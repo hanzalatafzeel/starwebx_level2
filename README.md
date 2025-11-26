@@ -129,31 +129,35 @@ Frontend will run on `http://localhost:5173`
 
 invoicegen/
 ├── backend/
-│ ├── app/
-│ │ ├── init.py # App factory
-│ │ ├── models.py # Database models
-│ │ ├── config.py # Configuration
-│ │ ├── routes/
-│ │ │ ├── auth.py # Auth endpoints
-│ │ │ └── invoice.py # Invoice CRUD endpoints
-│ │ └── utils/
-│ │ └── pdf_generator.py # PDF generation logic
-│ ├── run.py # Application entry point
-│ ├── requirements.txt # Python dependencies
-│ └── .env # Environment variables
+│   ├── app.py                 # Flask app entry
+│   ├── config.py              # App configuration & environment settings
+│   ├── controllers.py         # All API routes (auth, invoices)
+│   ├── models.py              # Database models (User, Invoice, Items)
+│   ├── pdf_generator.py       # PDF creation logic
+│   ├── requirements.txt       # Backend dependencies
+│   ├── instance/
+│   │   └── invoicegen.db      # SQLite DB (local only)
+│   ├── uploads/               # Uploaded logos (local only)
+│   └── .env                   # Environment variables (ignored in Git)
+│
 ├── frontend/
-│ ├── src/
-│ │ ├── components/ # Vue components
-│ │ ├── router/ # Vue Router config
-│ │ ├── store/ # Pinia stores
-│ │ ├── services/ # API service
-│ │ ├── App.vue # Root component
-│ │ └── main.js # Entry point
-│ ├── package.json # Node dependencies
-│ └── vite.config.js # Vite configuration
+│   ├── public/
+│   │   ├── index.html         # Base HTML
+│   │   ├── hero.png
+│   │   └── accept_payment.png
+│   ├── src/
+│   │   ├── components/        # Vue components
+│   │   ├── router/            # Vue Router setup
+│   │   ├── store/             # Pinia stores (auth, invoices)
+│   │   ├── services/          # Axios API wrapper
+│   │   ├── App.vue            # Root component
+│   │   └── main.js            # Vite entrypoint
+│   ├── package.json           # Frontend dependencies
+│   └── vite.config.js         # Proxy & build config
+│
+├── .gitignore
 └── README.md
 
-text
 
 ## 🔑 API Endpoints
 

@@ -103,10 +103,7 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    /**
-     * Optional: request backend to remove logo (if you implement an endpoint).
-     * If you don't have a backend delete endpoint, you can just clear locally.
-     */
+
     async removeLogo() {
       try {
         // Example: if you have a delete endpoint:

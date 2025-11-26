@@ -87,6 +87,7 @@ export default {
         router.push('/dashboard')
       } catch (err) {
         error.value = err.error || 'Login failed. Please try again.'
+        
       } finally {
         loading.value = false
       }
