@@ -1,116 +1,109 @@
-✨ Features
-🔐 Authentication
+# 🚀 InvoiceGen – Professional Invoice Generator (Flask + Vue.js)
 
-JWT-based signup & login
+![GitHub repo size](https://img.shields.io/github/repo-size/yourusername/invoicegen?color=blue)
+![GitHub stars](https://img.shields.io/github/stars/yourusername/invoicegen?style=social)
+![Maintenance](https://img.shields.io/badge/Maintained-yes-brightgreen)
+![License MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-Secure password hashing
+A full-stack **Invoice Management Application** built with **Flask (Backend)** and **Vue.js (Frontend)**.  
+Create, manage, and download beautiful invoices with your business branding.
 
-Persistent sessions via token storage
+---
 
-🧾 Invoice Management
+## ✨ Features
 
-Create, view, update, delete invoices
+### 🔐 Authentication
+- JWT-based signup & login  
+- Secure password hashing  
+- Auto-persist login session  
 
-Add multiple line items dynamically
+### 🧾 Invoice Management
+- Create, edit, delete invoices  
+- Unlimited line items  
+- Automatic totals and tax calculations  
+- Manage client details  
+- Auto-generate invoice numbers  
+- PDF invoice download  
+- Upload company logo  
 
-Automatic subtotal, tax, discount, and total calculations
+### 🎨 Modern UI
+- Responsive dashboard  
+- Clean layout (mobile-friendly)  
+- Dark-mode compatible  
 
-Save client details
+### ⚙️ Backend Highlights
+- REST API with Flask  
+- SQLAlchemy ORM  
+- JWT Authentication  
+- PDF Generation (ReportLab / WeasyPrint)  
+- CORS Enabled  
 
-Professional PDF generation with a clean layout
+---
 
-Company logo upload support
+## 🛠 Tech Stack
 
-🎨 User Interface
+### Backend
+- Flask  
+- SQLAlchemy  
+- Flask-Migrate  
+- Flask-JWT-Extended  
+- ReportLab / WeasyPrint  
+- SQLite / PostgreSQL  
 
-Modern responsive UI
+### Frontend
+- Vue 3  
+- Pinia  
+- Vue Router  
+- Axios  
+- Bootstrap 5  
+- Vite  
 
-Dark mode support
+---
 
-Tailored for desktop & mobile
+## 📂 Project Structure
 
-Smooth Vue.js experience
-
-⚙️ Backend
-
-RESTful API
-
-SQLAlchemy ORM
-
-Flask-JWT-Extended
-
-CORS enabled for cross-origin deployments
-
-Easy switch from SQLite → PostgreSQL
-
-🛠️ Tech Stack
-Backend
-
-Flask
-
-Flask-JWT-Extended
-
-Flask-SQLAlchemy
-
-Flask-Migrate
-
-WeasyPrint / ReportLab (PDF)
-
-SQLite / PostgreSQL
-
-Frontend
-
-Vue 3
-
-Pinia
-
-Vue Router
-
-Axios
-
-Vite
-
-Bootstrap 5
-
-📂 Project Structure
+```txt
 invoicegen/
 ├── backend/
-│   ├── app.py                 # Flask app entry point
-│   ├── config.py              # Environment & CORS configuration
-│   ├── controllers.py         # API routes (Auth, Invoices)
-│   ├── models.py              # ORM models
-│   ├── pdf_generator.py       # Invoice PDF generator
-│   ├── requirements.txt       # Python dependencies
+│   ├── app.py                 # Flask application entry
+│   ├── config.py              # Environment & CORS config
+│   ├── controllers.py         # All API routes
+│   ├── models.py              # Database models
+│   ├── pdf_generator.py       # PDF creation logic
+│   ├── requirements.txt
 │   ├── instance/
-│   │   └── invoicegen.db      # Local SQLite database
-│   ├── uploads/               # Uploaded company logos
-│   └── .env                   # Backend environment variables
+│   │   └── invoicegen.db
+│   ├── uploads/               # Uploaded logo files
+│   └── .env
 │
 ├── frontend/
-│   ├── public/                # Static assets
+│   ├── public/
 │   ├── src/
-│   │   ├── components/        # UI components
-│   │   ├── router/            # Frontend routing
-│   │   ├── store/             # Pinia authentication & invoice state
-│   │   ├── services/          # Axios API wrapper
-│   │   ├── App.vue            # Root component
-│   │   └── main.js            # Vite entry
+│   │   ├── components/
+│   │   ├── router/
+│   │   ├── store/
+│   │   ├── services/
+│   │   ├── App.vue
+│   │   └── main.js
 │   ├── package.json
 │   └── vite.config.js
 │
-├── README.md
-└── .gitignore
+└── README.md
 
-⚙️ Installation
-🔧 Backend Setup
+
+## ⚙️ Installation
+
+### 🔧 Backend Setup
+
+```bash
 cd backend
 python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
+source venv/bin/activate     # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env
 
 
-Edit .env:
+## Edit .env:
 
 SECRET_KEY=your-secret-key
 JWT_SECRET_KEY=your-jwt-secret-key
@@ -118,127 +111,118 @@ DATABASE_URL=sqlite:///invoicegen.db
 CORS_ORIGINS=http://localhost:5173
 
 
-Initialize DB:
+
+Initialize database:
 
 flask init-db
 
 
-Start backend:
+Run backend:
 
 python app.py
 
-
-Backend will run at http://localhost:5000
-
-🖥️ Frontend Setup
+Frontend Setup
 cd frontend
 npm install
 npm run dev
 
 
-Frontend runs at http://localhost:5173
+Frontend runs at:
+
+http://localhost:5173
 
 📄 API Endpoints
-🔐 Authentication
+Authentication
 Method	Endpoint	Description
-POST	/api/auth/signup	Register new user
-POST	/api/auth/login	Login user
-GET	/api/auth/me	Fetch logged-in user
-🧾 Invoices
+POST	/api/auth/signup	Register
+POST	/api/auth/login	Login
+GET	/api/auth/me	Get current user
+Invoices
 Method	Endpoint	Description
 GET	/api/invoices	List invoices
 GET	/api/invoices/:id	Get invoice
 POST	/api/invoices	Create invoice
 PUT	/api/invoices/:id	Update invoice
 DELETE	/api/invoices/:id	Delete invoice
-GET	/api/invoices/:id/download	PDF download
-🧱 Database Schema
+GET	/api/invoices/:id/download	Download PDF
+🗄 Database Schema
 Users
 id, email, password_hash, full_name, company_name, company_logo, created_at
 
 Invoices
-id, invoice_number, user_id, client_name, client_email, client_address,
-invoice_date, due_date, notes, subtotal, tax_rate, tax_amount, total,
-created_at, updated_at
+id, invoice_number, user_id, client_name, client_email,
+client_address, invoice_date, due_date, notes,
+subtotal, tax_rate, tax_amount, total, created_at, updated_at
 
 Invoice Items
 id, invoice_id, description, quantity, unit_price, total
 
 🚀 Deployment
-▶️ Backend Deployment (Render / Railway / DigitalOcean)
+Backend (Render / Railway)
 
-Add gunicorn to requirements.txt
+Install gunicorn:
+
+gunicorn
+
 
 Render Start Command:
 
 gunicorn 'app:app' --bind 0.0.0.0:$PORT --workers 3
 
-Set Production Environment Variables:
+
+Environment Variables:
+
 FLASK_ENV=production
 CORS_ORIGINS=https://your-frontend.vercel.app
-SECRET_KEY=...
-JWT_SECRET_KEY=...
+SECRET_KEY=xxxx
+JWT_SECRET_KEY=xxxx
 DATABASE_URL=postgresql://...
 
-▶️ Frontend Deployment (Vercel / Netlify)
+Frontend (Vercel / Netlify)
+
+Set environment variable:
+
+VITE_API_URL=https://your-backend.onrender.com
+
 
 Build:
 
 npm run build
 
 
-For Vercel, add env:
+Deploy the dist/ folder.
 
-VITE_API_URL=https://your-backend.onrender.com
+🔒 Security
 
+JWT tokens
 
-Then deploy.
-
-🔒 Security Features
-
-JWT-based protection for all API routes
-
-Strong password hashing (Werkzeug)
-
-Role-safe, protected endpoints
+Password hashing
 
 CORS protection
 
-Server-side validation
+ORM SQL injection prevention
 
-Prevents SQL injection via SQLAlchemy ORM
-
-📸 Screenshots
-
-(Add your invoice UI or dashboard screenshots below)
-
-<Place your screenshot images here>
+Sanitized API inputs
 
 🤝 Contributing
 
-Pull requests are welcome!
+Fork the repo
 
-Steps:
+Create a new branch
 
-Fork this repo
+Commit your changes
 
-Create a feature branch
-
-Commit changes
-
-Open PR 🎉
+Submit a Pull Request
 
 📜 License
 
-This project is licensed under the MIT License.
+MIT License
 
 👨‍💻 Author
 
 Hanzala Tafzeel
-Full-Stack Developer | IITM BS Student
+Full-Stack Developer | IITM BS Data Science Student
 
-🌟 Final Words
+⭐ Support
 
-If you find this project helpful, please consider ⭐ starring the repository!
-
-Happy Invoicing! 🧾✨
+If you liked this project, please give it a star ⭐ on GitHub!
